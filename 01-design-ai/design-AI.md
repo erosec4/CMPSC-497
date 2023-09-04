@@ -1,8 +1,14 @@
 # 1. _Name a real-world example of an existing AI system that is problematic in that it actually enacts existing problematic social systems/practices_
-The algorithm employed by the popular social media app Tik Tok is an example of an AI system. These **recommendation systems**, also on Instagram, ... In my observation, this application is problematic as it has played a significant role in increasing the average screen time of younger generations. ... This emphasizes society's larger goal of moving towards more screens and limiting natural experiences. Similar to how Benjamin describes the appeal technocorrections, this seems appealing, but ... Tik Tok has been banned in many cases over privacy concerns (specifically data sharing with China), but there has been little talk of the detrimental side effects of shortened attention span ...
+Recommendation systems are an example of an AI system that can be harmful when implemented irresponsibly. The algorithm employed by the popular social media app Tik Tok is a well-known example of one such system. This algorithm seems to perfectly curate every users' "For You" page to their interests within minutes of scrolling on the app. Many users have pointed out the negative side effects of this addictive algorithm, such as shortened attention spans and dramatic increases in screen time. Of course, everyone has a personal responsibility to regulate their own screen time, but when such a powerful algorithm can get so many users addicted to an application, it raises the question: At what point are the developers of the application responsible for intentional psychological effects? The appeal of this shiny improved technology and the wide-reaching globalization of the app has blinded the general public to the long-term implications of normalizing such technology use. As Benjamin describes in *Discriminatory Design, Liberating Imagination*, we need to start "questioning breathless claimes of techno-utopianism, rethinking what counts as innovation." Benjamin was talking specifically about issues of racial justice, but the sentiment applies here too, as consideration for wellbeing is necessary to ensure that innovation is moving us towards a sustainable and healthy future and not a superficial idea of utopia. Tik Tok has been banned in many cases over privacy concerns, which also relates to the recommender engine as it collects personal data to improve personalization (in addition to content-based and collaborative filtering), but little direct action has been taken over concerns of psychological effects.
 
 # 2. _Describe this system in terms of (your perceived high-level) goals, environment, and adaptations of the system_
-Goals: get people hooked on the app  
+Goals:
+What might be the goals of the AI system?
+ 
 Environment:
+What is the environment that the system will be adapting within?
+ 
+Adaptation:
+How might the system adapt to the environment given the goals? How might it's inner environment change?
 
 # 3. _Describe a potential reimagined system in terms of **goals**, **environment**, and **adaptations**. How does it improve upon the system described in 2?_
