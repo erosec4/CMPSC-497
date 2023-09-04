@@ -6,3 +6,4 @@ Recommendation systems are an example of an AI system that can be harmful when i
 
 
 # 3. _Describe a potential reimagined system in terms of **goals**, **environment**, and **adaptations**. How does it improve upon the system described in 2?_
+A better, more advanced recommendation system could be based on research about what kind of content promotes healthier brain functions for users with similar habits (a more holistic approach to healthy content consumption). The environment would be similar, just with more options for self-regulation. It could adapt to recognize harmful patterns in user activity and provide interventions.
