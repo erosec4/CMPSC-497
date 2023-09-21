@@ -35,9 +35,10 @@ class VacuumAgent(python_actr.ACTR):
 
 
 	# When num_turns = 1
-	def left_rsearch_increase(goal="rsearch left ?dist 1 0", motorInst="busy:False", utility = 0.2): # Changed from utility=0.1
+	def left_rsearch_increase(goal="rsearch left ?dist 1 0", motorInst="busy:False", 
+					utility=0.2): # Changed from utility=0.1
 		motorInst.turn_left(2)
-		dist = str(int(dist) + 1) # NEW
+		dist = str(int(dist) + 1) # Increments distance to continue spiral
 		goal.set("rsearch left ?dist 0 ?dist")
 
 	# When num_turns = 0
@@ -46,6 +47,14 @@ class VacuumAgent(python_actr.ACTR):
 		motorInst.turn_left(2)
 		num_turns = str(int(num_turns) + 1)
 		goal.set("rsearch left ?dist ?num_turns ?dist")
+
+
+	# Wall ahead --> trace the wall
+	def trace_wall(goal="rsearch left ?dist ?num_turns ?curr_dist",
+						motorInst="busy:False", body="ahead_cell.wall:True"):
+		motorInst.turn_left(2)
+		print(body.ahead_cell.wall)
+		goal.set("rsearch left ?dist ?num_turns 8")
 
 
 
