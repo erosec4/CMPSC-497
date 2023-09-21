@@ -33,12 +33,20 @@ class VacuumAgent(python_actr.ACTR):
 		curr_dist = str(int(curr_dist) - 1) # curr_dist var created from "?curr_dist" slot in the condition; change to adjust goal state
 		goal.set("rsearch left ?dist ?num_turns ?curr_dist")
 
+
+	# When num_turns = 1
+	def left_rsearch_increase(goal="rsearch left ?dist 1 0", motorInst="busy:False", utility = 0.2): # Changed from utility=0.1
+		motorInst.turn_left(2)
+		dist = str(int(dist) + 1) # NEW
+		goal.set("rsearch left ?dist 0 ?dist")
+
+	# When num_turns = 0
 	def left_rsearch(goal="rsearch left ?dist ?num_turns 0", motorInst="busy:False",
 					utility=0.1):
 		motorInst.turn_left(2)
 		num_turns = str(int(num_turns) + 1)
-		dist = str(int(dist) + 1) # NEW wait it actually worked
 		goal.set("rsearch left ?dist ?num_turns ?dist")
+
 
 
 
