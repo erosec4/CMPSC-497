@@ -36,19 +36,18 @@ class PizzaBuilder_DM(ACTR):
 
     def prep_ingredients(goal="start_pizza"):
         #start building our pizza!
-        goal.set("build_pizza prev:prep next:?next")
+        goal.set("build_pizza")
         #Request next step from DM
-        DM_module.request("history prev:prep next:?next") # Error? prev:prep next:?next
+        DM_module.request("prev:prep next:?next_ingred") # Need retrieval
         
     ###Rules to request from declarative memory for next step/ingredient and place that ingredient on your pizza and make sure you can more on to cooking pizza
-    def add_toppings(goal="build_pizza prev:?prev next:?next", retrieval="prev:?prev next:?next"):
-        my_pizza.append(next)
-        goal.modify(prev=next)
+    def add_toppings(goal="build_pizza", retrieval="prev:?prev_ingred next:?next_ingred!onion"): # Slot name != value name
+        my_pizza.append(next_ingred)
         # Request next step from DM
-        DM_module.request("prev:prev next:?next") # ???
+        DM_module.request("prev:?next_ingred next:?next_topping") # prev:?next_ingred or prev:next_ingred
     
     # Last step: onion, then cook
-    def add_onion(goal="build_pizza prev:?prev next:onion", retrieval="prev:?prev next:onion"):
+    def add_onion(goal="build_pizza", retrieval="prev:?prev_ingred next:onion"):
         my_pizza.append("onion")
         goal.set("cook_pizza")
 
