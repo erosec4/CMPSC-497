@@ -8,7 +8,7 @@ from python_actr.actr.hdm import *
 class PizzaBuilder_DM(ACTR):
     goal = Buffer()
     retrieval = Buffer()
-    DM_module = HDM(retrieval,finst_size=22,finst_time=100.0) # Added finst_size and finst_time parameters
+    DM_module = HDM(retrieval,finst_size=22,finst_time=100.0) # Added finst_size=22,finst_time=100.0 parameters
     my_pizza = []
 
     def cook_pizza(self, pizza_ingred):
@@ -35,19 +35,19 @@ class PizzaBuilder_DM(ACTR):
         goal.set("start_pizza")
 
     def prep_ingredients(goal="start_pizza"):
-        #start building our pizza!
+        # Start building our pizza!
         goal.set("build_pizza")
-        #Request next step from DM
+        # Request next step from DM
         DM_module.request("prev:prep next:?next_ingred") # Need retrieval
         
     ###Rules to request from declarative memory for next step/ingredient and place that ingredient on your pizza and make sure you can more on to cooking pizza
-    def add_toppings(goal="build_pizza", retrieval="prev:?prev_ingred next:?next_ingred!onion"): # Slot name != value name
+    def add_toppings(goal="build_pizza", retrieval="prev:?x next:?next_ingred!onion"): # Slot name != value
         my_pizza.append(next_ingred)
         # Request next step from DM
-        DM_module.request("prev:?next_ingred next:?next_topping") # prev:?next_ingred or prev:next_ingred
+        DM_module.request("prev:?next_ingred next:?y")
     
     # Last step: onion, then cook
-    def add_onion(goal="build_pizza", retrieval="prev:?prev_ingred next:onion"):
+    def add_onion(goal="build_pizza", retrieval="prev:?x next:onion"):
         my_pizza.append("onion")
         goal.set("cook_pizza")
 
