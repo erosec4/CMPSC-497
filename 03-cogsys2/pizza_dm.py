@@ -8,7 +8,7 @@ from python_actr.actr.hdm import *
 class PizzaBuilder_DM(ACTR):
     goal = Buffer()
     retrieval = Buffer()
-    DM_module = Memory(retrieval)
+    DM_module = Memory(retrieval) # Changed from HDM(retrieval) to stop infinite loop (DM_module was always busy, couldn't request DM)
     my_pizza = []
 
     def cook_pizza(self, pizza_ingred):
@@ -38,18 +38,23 @@ class PizzaBuilder_DM(ACTR):
         # Start building our pizza!
         goal.set("build_pizza done:prep new:any")
         # Request next step from DM
-        DM_module.request("prev:prep next:?next_ingred") # Need retrieval
+        DM_module.request("prev:prep next:?next_ingred") # Need retrieval to activate add_toppings rule
         
-    ###Rules to request from declarative memory for next step/ingredient and place that ingredient on your pizza and make sure you can more on to cooking pizza
-    def add_toppings(goal="build_pizza done:?a new:?b", retrieval="prev:?x next:?next_ingred!onion"): # Slot name != value
+    ###Rules to request from declarative memory for next step/ingredient and place that ingredient on your pizza and make sure you can move on to cooking pizza
+    def add_toppings(goal="build_pizza done:?a new:?b", retrieval="prev:?x next:?next_ingred!onion"): # Slot name should not be the same as the value!
+        # Goal: takes any values for done and new
+        # Retrieval: takes any value for prev, any value except onion for next
         my_pizza.append(next_ingred)
-        # Request next step from DM
-        DM_module.request("prev:?next_ingred next:?y")
-        goal.modify(done=next_ingred) # Take y from memory request
+        # Request next step from DM 
+        DM_module.request("prev:?next_ingred next:?y") # Specifies prev as the current "next" ingredient, looks for new "next" (y acts as a placeholder)
+        # Update goal buffer
+        goal.modify(done=next_ingred) # The original "next" value is now the previous after the rule execution
     
     # Last step: onion, then cook
     def add_onion(goal="build_pizza done:?a new:?b", retrieval="prev:?x next:onion"):
+        # Will activate when the memory request returns onion as the value for next
         my_pizza.append("onion")
+        # Changes goal to initiate the last rule
         goal.set("cook_pizza")
 
     def cook_pizza_step(goal="cook_pizza"):
